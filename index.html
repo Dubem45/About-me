@@ -1,0 +1,963 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#050510" />
+    <meta
+      name="description"
+      content="Dubem (@J_Caldwell21) — Web3 enthusiast and researcher. Cosmic neon personal card."
+    />
+    <title>Dubem (@J_Caldwell21) — Personal Card</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              ink: "#050510",
+              panel: "rgba(255,255,255,0.06)",
+              panel2: "rgba(255,255,255,0.09)",
+              neonCyan: "#00F5FF",
+              neonPink: "#FF3DFF",
+              neonPurple: "#8B5CFF",
+            },
+            boxShadow: {
+              glow:
+                "0 0 0 1px rgba(255,255,255,0.08), 0 10px 40px rgba(0,245,255,0.12), 0 6px 22px rgba(255,61,255,0.10)",
+              glowStrong:
+                "0 0 0 1px rgba(255,255,255,0.10), 0 18px 70px rgba(0,245,255,0.18), 0 14px 45px rgba(255,61,255,0.14)",
+            },
+            backgroundImage: {
+              cyber:
+                "radial-gradient(1200px 800px at 20% 10%, rgba(139,92,255,0.22), transparent 55%), radial-gradient(900px 700px at 85% 20%, rgba(0,245,255,0.18), transparent 55%), radial-gradient(900px 700px at 55% 95%, rgba(255,61,255,0.16), transparent 60%), linear-gradient(180deg, #050510 0%, #07061a 55%, #050510 100%)",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      .noise::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.08;
+        mix-blend-mode: overlay;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+      }
+      .orb {
+        position: absolute;
+        border-radius: 9999px;
+        filter: blur(28px);
+        opacity: 0.55;
+        transform: translateZ(0);
+        will-change: transform;
+      }
+      @keyframes floaty {
+        0% {
+          transform: translate3d(0, 0, 0) scale(1);
+        }
+        50% {
+          transform: translate3d(14px, -18px, 0) scale(1.03);
+        }
+        100% {
+          transform: translate3d(0, 0, 0) scale(1);
+        }
+      }
+      @keyframes floaty2 {
+        0% {
+          transform: translate3d(0, 0, 0) scale(1);
+        }
+        50% {
+          transform: translate3d(-18px, 14px, 0) scale(1.05);
+        }
+        100% {
+          transform: translate3d(0, 0, 0) scale(1);
+        }
+      }
+      @keyframes shimmer {
+        0% {
+          transform: translateX(-35%);
+          opacity: 0.15;
+        }
+        50% {
+          opacity: 0.35;
+        }
+        100% {
+          transform: translateX(35%);
+          opacity: 0.15;
+        }
+      }
+      .shine::after {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        border-radius: inherit;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(0, 245, 255, 0.25) 35%,
+          rgba(255, 61, 255, 0.25) 50%,
+          rgba(139, 92, 255, 0.25) 65%,
+          transparent 100%
+        );
+        filter: blur(10px);
+        animation: shimmer 7s ease-in-out infinite;
+        pointer-events: none;
+      }
+      .gridGlow {
+        background-image: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0.06) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.06) 1px,
+            transparent 1px
+          );
+        background-size: 34px 34px;
+        mask-image: radial-gradient(circle at 50% 35%, black 0%, transparent 70%);
+        opacity: 0.35;
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(14px);
+        transition: opacity 700ms ease, transform 700ms ease;
+      }
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .focus-ring:focus-visible {
+        outline: 2px solid rgba(0, 245, 255, 0.75);
+        outline-offset: 3px;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .reveal {
+          transition: none;
+          transform: none;
+          opacity: 1;
+        }
+        .shine::after,
+        .orb {
+          animation: none !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="min-h-screen bg-ink text-white selection:bg-neonCyan/20 selection:text-white">
+    <!-- Background -->
+    <div class="fixed inset-0 -z-10 bg-cyber noise">
+      <div class="absolute inset-0 gridGlow"></div>
+
+      <div
+        class="orb left-[-10%] top-[-8%] h-[260px] w-[260px] bg-neonPurple/60"
+        style="animation: floaty 13s ease-in-out infinite"
+      ></div>
+      <div
+        class="orb right-[-12%] top-[10%] h-[320px] w-[320px] bg-neonCyan/55"
+        style="animation: floaty2 16s ease-in-out infinite"
+      ></div>
+      <div
+        class="orb left-[22%] bottom-[-18%] h-[360px] w-[360px] bg-neonPink/45"
+        style="animation: floaty 18s ease-in-out infinite"
+      ></div>
+      <div
+        class="orb right-[18%] bottom-[-12%] h-[220px] w-[220px] bg-neonPurple/35"
+        style="animation: floaty2 20s ease-in-out infinite"
+      ></div>
+    </div>
+
+    <!-- Top glow line -->
+    <div class="fixed left-0 right-0 top-0 z-40 h-[2px] bg-gradient-to-r from-neonCyan via-neonPink to-neonPurple opacity-70"></div>
+
+    <!-- Navigation -->
+    <header class="sticky top-0 z-30 backdrop-blur-xl bg-ink/40 border-b border-white/10">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="flex items-center justify-between py-3">
+          <a
+            href="#home"
+            class="group inline-flex items-center gap-2 focus-ring rounded-md"
+            aria-label="Go to Home"
+          >
+            <span
+              class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 border border-white/10 shadow-glow"
+            >
+              <svg viewBox="0 0 24 24" class="h-5 w-5">
+                <path
+                  fill="currentColor"
+                  d="M12 2l2.4 5.6L20 10l-5.6 2.4L12 18l-2.4-5.6L4 10l5.6-2.4L12 2zm0 8.2a.8.8 0 100 1.6.8.8 0 000-1.6z"
+                />
+              </svg>
+            </span>
+            <div class="leading-tight">
+              <div class="text-sm font-semibold tracking-wide">
+                Dubem
+                <span class="text-white/60">@J_Caldwell21</span>
+              </div>
+              <div class="text-[11px] text-white/60 tracking-wider">
+                Neon Web3 Card
+              </div>
+            </div>
+          </a>
+
+          <nav class="hidden sm:flex items-center gap-1 text-sm">
+            <a class="px-3 py-2 rounded-xl hover:bg-white/5 focus-ring text-white/80 hover:text-white" href="#home">Home</a>
+            <a class="px-3 py-2 rounded-xl hover:bg-white/5 focus-ring text-white/80 hover:text-white" href="#about">About</a>
+            <a class="px-3 py-2 rounded-xl hover:bg-white/5 focus-ring text-white/80 hover:text-white" href="#work">Work</a>
+            <a class="px-3 py-2 rounded-xl hover:bg-white/5 focus-ring text-white/80 hover:text-white" href="#vibe">Vibe</a>
+          </nav>
+
+          <div class="flex items-center gap-2">
+            <a
+              href="https://x.com/J_Caldwell21"
+              target="_blank"
+              rel="noreferrer"
+              class="hidden xs:inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm font-semibold shadow-glow hover:shadow-glowStrong hover:bg-white/10 transition focus-ring"
+              aria-label="Open X (Twitter)"
+            >
+              <svg viewBox="0 0 24 24" class="h-4 w-4 text-white/90">
+                <path
+                  fill="currentColor"
+                  d="M18.244 2H21l-6.55 7.49L22.5 22h-6.78l-5.31-6.52L4.6 22H2l7.02-8.03L1.5 2h6.95l4.8 5.86L18.244 2zm-1.19 18h1.88L7.91 3.9H5.9L17.054 20z"
+                />
+              </svg>
+              <span class="tracking-wide">
+                X
+                <span class="text-white/60 font-medium">@J_Caldwell21</span>
+              </span>
+            </a>
+
+            <button
+              id="copyBtnTop"
+              class="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm font-semibold hover:bg-white/10 transition focus-ring"
+              type="button"
+            >
+              <svg viewBox="0 0 24 24" class="h-4 w-4 text-neonCyan">
+                <path
+                  fill="currentColor"
+                  d="M16 1H6a2 2 0 00-2 2v12h2V3h10V1zm3 4H10a2 2 0 00-2 2v14a2 2 0 002 2h9a2 2 0 002-2V7a2 2 0 00-2-2zm0 16h-9V7h9v14z"
+                />
+              </svg>
+              <span id="copyBtnTopText">Copy Link</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-4 sm:px-6">
+      <!-- Hero -->
+      <section id="home" class="relative pt-10 sm:pt-16 pb-12 sm:pb-16">
+        <div class="absolute inset-x-0 -top-8 h-40 blur-3xl opacity-40 bg-gradient-to-r from-neonCyan/30 via-neonPink/30 to-neonPurple/30"></div>
+
+        <div class="grid gap-6 lg:grid-cols-12 items-start">
+          <div class="lg:col-span-7">
+            <div
+              class="reveal inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs tracking-widest text-white/70 shadow-glow"
+            >
+              <span class="h-2 w-2 rounded-full bg-neonCyan shadow-[0_0_20px_rgba(0,245,255,0.8)]"></span>
+              WEB3 • RESEARCH • COSMIC SIGNAL
+            </div>
+
+            <h1 class="reveal mt-4 text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.02] tracking-tight">
+              <span class="block text-white">Dubem</span>
+              <span
+                class="block bg-gradient-to-r from-neonCyan via-neonPink to-neonPurple bg-clip-text text-transparent drop-shadow-[0_0_22px_rgba(0,245,255,0.18)]"
+              >
+                @J_Caldwell21
+              </span>
+            </h1>
+
+            <p class="reveal mt-5 max-w-xl text-base sm:text-lg text-white/75 leading-relaxed">
+              Web3 enthusiast and researcher. I believe in something bigger — exploring decentralized tech,
+              opportunities in the bear market, and supporting real builders in the space.
+            </p>
+
+            <div class="reveal mt-7 flex flex-col sm:flex-row gap-3 sm:items-center">
+              <a
+                href="https://x.com/J_Caldwell21"
+                target="_blank"
+                rel="noreferrer"
+                class="group relative overflow-hidden rounded-2xl bg-white/5 border border-white/10 px-5 py-3 shadow-glow hover:shadow-glowStrong transition focus-ring"
+              >
+                <span class="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-gradient-to-r from-neonCyan/20 via-neonPink/20 to-neonPurple/20"></span>
+                <span class="relative inline-flex items-center gap-2 font-semibold">
+                  <svg viewBox="0 0 24 24" class="h-5 w-5 text-white/90">
+                    <path
+                      fill="currentColor"
+                      d="M18.244 2H21l-6.55 7.49L22.5 22h-6.78l-5.31-6.52L4.6 22H2l7.02-8.03L1.5 2h6.95l4.8 5.86L18.244 2zm-1.19 18h1.88L7.91 3.9H5.9L17.054 20z"
+                    />
+                  </svg>
+                  Follow on X
+                  <span class="text-white/60 font-medium">@J_Caldwell21</span>
+                </span>
+              </a>
+
+              <div class="flex gap-2">
+                <a
+                  href="#about"
+                  class="rounded-2xl px-5 py-3 border border-white/10 bg-white/5 hover:bg-white/10 transition focus-ring text-sm font-semibold text-white/85"
+                >
+                  Explore
+                </a>
+                <a
+                  href="#vibe"
+                  class="rounded-2xl px-5 py-3 border border-white/10 bg-white/5 hover:bg-white/10 transition focus-ring text-sm font-semibold text-white/85"
+                >
+                  Vibe Level
+                </a>
+              </div>
+            </div>
+
+            <div class="reveal mt-8 flex flex-wrap items-center gap-3">
+              <a
+                class="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/80 hover:bg-white/10 transition focus-ring"
+                href="#work"
+              >
+                <svg viewBox="0 0 24 24" class="h-4 w-4 text-neonPink">
+                  <path
+                    fill="currentColor"
+                    d="M10 2h4a2 2 0 012 2v2h4a2 2 0 012 2v10a4 4 0 01-4 4H6a4 4 0 01-4-4V8a2 2 0 012-2h4V4a2 2 0 012-2zm4 4V4h-4v2h4zm-2 6a1 1 0 011 1v.5h7V8H4v5.5h7V13a1 1 0 011-1z"
+                  />
+                </svg>
+                What I Do
+              </a>
+
+              <button
+                id="shareBtn"
+                class="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/80 hover:bg-white/10 transition focus-ring"
+                type="button"
+              >
+                <svg viewBox="0 0 24 24" class="h-4 w-4 text-neonCyan">
+                  <path
+                    fill="currentColor"
+                    d="M18 16a3 3 0 00-2.4 1.2L8.9 13.7a3.1 3.1 0 000-3.4l6.7-3.5A3 3 0 1015 5a3 3 0 00.1.7L8.4 9.2a3 3 0 100 5.6l6.7 3.5A3 3 0 1018 16z"
+                  />
+                </svg>
+                Share Card
+              </button>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5">
+            <div class="reveal relative overflow-hidden rounded-3xl border border-white/10 bg-panel p-5 sm:p-6 shadow-glow shine">
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <div class="text-xs tracking-widest text-white/60">VIBE SIGNAL</div>
+                  <div class="mt-1 text-lg font-semibold tracking-tight">
+                    Crypto Believer Mode 🔥
+                  </div>
+                  <div class="mt-1 text-sm text-white/70">
+                    Web3 Cosmic
+                    <span class="font-semibold text-white">7777/10000</span>
+                    🌌
+                  </div>
+                </div>
+                <div class="rounded-2xl border border-white/10 bg-white/5 px-3 py-2 text-xs text-white/70">
+                  Live • Neon
+                </div>
+              </div>
+
+              <div class="mt-5 grid grid-cols-3 gap-3">
+                <div class="rounded-2xl border border-white/10 bg-white/5 p-3 hover:bg-white/10 transition">
+                  <div class="text-xs text-white/60">Research</div>
+                  <div class="mt-1 font-semibold">High</div>
+                </div>
+                <div class="rounded-2xl border border-white/10 bg-white/5 p-3 hover:bg-white/10 transition">
+                  <div class="text-xs text-white/60">Conviction</div>
+                  <div class="mt-1 font-semibold">7777</div>
+                </div>
+                <div class="rounded-2xl border border-white/10 bg-white/5 p-3 hover:bg-white/10 transition">
+                  <div class="text-xs text-white/60">Builder Love</div>
+                  <div class="mt-1 font-semibold">∞</div>
+                </div>
+              </div>
+
+              <div class="mt-5 flex items-center justify-between gap-3">
+                <div class="flex items-center gap-2">
+                  <span class="inline-flex h-2.5 w-2.5 rounded-full bg-neonPink shadow-[0_0_18px_rgba(255,61,255,0.75)]"></span>
+                  <span class="text-sm text-white/70">Signal is warm</span>
+                </div>
+                <a
+                  href="#vibe"
+                  class="text-sm font-semibold text-white/85 hover:text-white focus-ring rounded-md"
+                >
+                  View ring →
+                </a>
+              </div>
+            </div>
+
+            <div class="reveal mt-4 grid grid-cols-4 gap-2">
+              <a
+                href="https://x.com/J_Caldwell21"
+                target="_blank"
+                rel="noreferrer"
+                class="group rounded-2xl border border-white/10 bg-white/5 p-3 hover:bg-white/10 transition shadow-glow focus-ring"
+                aria-label="X (Twitter)"
+                title="X"
+              >
+                <svg viewBox="0 0 24 24" class="h-5 w-5 text-white/85 group-hover:text-white transition">
+                  <path
+                    fill="currentColor"
+                    d="M18.244 2H21l-6.55 7.49L22.5 22h-6.78l-5.31-6.52L4.6 22H2l7.02-8.03L1.5 2h6.95l4.8 5.86L18.244 2zm-1.19 18h1.88L7.91 3.9H5.9L17.054 20z"
+                  />
+                </svg>
+              </a>
+              <a
+                href="#"
+                class="group rounded-2xl border border-white/10 bg-white/5 p-3 hover:bg-white/10 transition shadow-glow focus-ring"
+                aria-label="GitHub (placeholder)"
+                title="GitHub (placeholder)"
+              >
+                <svg viewBox="0 0 24 24" class="h-5 w-5 text-white/70 group-hover:text-white transition">
+                  <path
+                    fill="currentColor"
+                    d="M12 .5C5.73.5.75 5.6.75 12c0 5.1 3.29 9.42 7.86 10.95.58.11.79-.26.79-.57v-2c-3.2.71-3.87-1.28-3.87-1.28-.52-1.36-1.27-1.72-1.27-1.72-1.04-.73.08-.72.08-.72 1.15.08 1.76 1.2 1.76 1.2 1.02 1.78 2.67 1.27 3.32.97.1-.75.4-1.27.72-1.56-2.55-.3-5.23-1.3-5.23-5.76 0-1.27.45-2.3 1.19-3.11-.12-.3-.52-1.51.11-3.15 0 0 .97-.32 3.18 1.19a10.8 10.8 0 015.8 0c2.2-1.51 3.17-1.19 3.17-1.19.63 1.64.23 2.85.11 3.15.74.81 1.19 1.84 1.19 3.11 0 4.47-2.69 5.46-5.25 5.75.41.36.78 1.08.78 2.18v3.23c0 .32.21.69.8.57A11.3 11.3 0 0023.25 12C23.25 5.6 18.27.5 12 .5z"
+                  />
+                </svg>
+              </a>
+              <a
+                href="#"
+                class="group rounded-2xl border border-white/10 bg-white/5 p-3 hover:bg-white/10 transition shadow-glow focus-ring"
+                aria-label="Email (placeholder)"
+                title="Email (placeholder)"
+              >
+                <svg viewBox="0 0 24 24" class="h-5 w-5 text-white/70 group-hover:text-white transition">
+                  <path
+                    fill="currentColor"
+                    d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+                  />
+                </svg>
+              </a>
+              <a
+                href="#"
+                class="group rounded-2xl border border-white/10 bg-white/5 p-3 hover:bg-white/10 transition shadow-glow focus-ring"
+                aria-label="Discord (placeholder)"
+                title="Discord (placeholder)"
+              >
+                <svg viewBox="0 0 24 24" class="h-5 w-5 text-white/70 group-hover:text-white transition">
+                  <path
+                    fill="currentColor"
+                    d="M20.3 4.4A19.5 19.5 0 0015.7 3c-.2.4-.5 1-.6 1.4-1.8-.3-3.6-.3-5.4 0-.1-.4-.4-1-.6-1.4-1.6.3-3.1.8-4.6 1.4C2 8 1.4 11.5 1.7 15c1.7 1.2 3.4 2 5.3 2.5.4-.6.8-1.2 1.1-1.9-.6-.2-1.2-.5-1.7-.8l.4-.3c3.3 1.5 6.9 1.5 10.2 0l.4.3c-.6.3-1.1.6-1.7.8.3.7.7 1.3 1.1 1.9 1.9-.5 3.6-1.3 5.3-2.5.4-4.1-.7-7.6-3.4-10.6zM8.5 13.7c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2zm7 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section id="about" class="py-10 sm:py-14">
+        <div class="reveal flex items-end justify-between gap-4">
+          <div>
+            <div class="text-xs tracking-widest text-white/60">ABOUT</div>
+            <h2 class="mt-2 text-2xl sm:text-3xl font-extrabold tracking-tight">
+              About Me
+            </h2>
+          </div>
+          <div class="hidden sm:block text-sm text-white/60">
+            Decentralized tech • Bear market focus • Real builders
+          </div>
+        </div>
+
+        <div class="mt-6 grid gap-4 lg:grid-cols-12">
+          <div class="reveal lg:col-span-7 rounded-3xl border border-white/10 bg-panel p-6 shadow-glow hover:shadow-glowStrong transition">
+            <div class="flex items-start gap-3">
+              <div class="mt-1 h-10 w-10 rounded-2xl bg-white/5 border border-white/10 grid place-items-center">
+                <svg viewBox="0 0 24 24" class="h-5 w-5 text-neonPurple">
+                  <path
+                    fill="currentColor"
+                    d="M12 2l3 7h7l-5.6 4.1L18.5 20 12 15.9 5.5 20l2.1-6.9L2 9h7l3-7z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <p class="text-white/80 leading-relaxed">
+                  Web3 enthusiast and researcher. I believe in something bigger — exploring decentralized tech,
+                  opportunities in the bear market, and supporting real builders in the space.
+                </p>
+                <p class="mt-3 text-sm text-white/60">
+                  Premium energy, calm signal, neon edges.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal lg:col-span-5 rounded-3xl border border-white/10 bg-panel p-6 shadow-glow hover:shadow-glowStrong transition relative overflow-hidden">
+            <div class="absolute -right-12 -top-12 h-40 w-40 rounded-full bg-neonCyan/20 blur-2xl"></div>
+            <div class="absolute -left-14 -bottom-14 h-44 w-44 rounded-full bg-neonPink/15 blur-2xl"></div>
+            <div class="relative">
+              <div class="text-sm font-semibold tracking-wide">Signal traits</div>
+              <ul class="mt-4 space-y-3 text-sm text-white/75">
+                <li class="flex items-center gap-2">
+                  <span class="h-1.5 w-1.5 rounded-full bg-neonCyan"></span>
+                  Builder-first mindset
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="h-1.5 w-1.5 rounded-full bg-neonPink"></span>
+                  Opportunity tracking (especially in the bear)
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="h-1.5 w-1.5 rounded-full bg-neonPurple"></span>
+                  Always learning, always believing
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Work -->
+      <section id="work" class="py-10 sm:py-14">
+        <div class="reveal">
+          <div class="text-xs tracking-widest text-white/60">WORK</div>
+          <h2 class="mt-2 text-2xl sm:text-3xl font-extrabold tracking-tight">
+            What I Do
+          </h2>
+          <p class="mt-3 max-w-2xl text-white/70 leading-relaxed">
+            I research Web3 projects, track opportunities, engage with builders, and stay active in the crypto ecosystem.
+            Always learning, always believing.
+          </p>
+        </div>
+
+        <div class="mt-7 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div class="reveal rounded-3xl border border-white/10 bg-panel p-6 shadow-glow hover:shadow-glowStrong transition group">
+            <div class="flex items-center justify-between">
+              <div class="rounded-2xl border border-white/10 bg-white/5 p-3">
+                <svg viewBox="0 0 24 24" class="h-5 w-5 text-neonCyan">
+                  <path
+                    fill="currentColor"
+                    d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 14.9V19h-2v-2.1a6.9 6.9 0 01-3.9-2.2l1.4-1.4A5 5 0 0012 15a5 5 0 003.5-1.7l1.4 1.4a6.9 6.9 0 01-3.9 2.2zM7 10a5 5 0 0110 0H7z"
+                  />
+                </svg>
+              </div>
+              <span class="text-xs text-white/60">01</span>
+            </div>
+            <h3 class="mt-4 text-lg font-semibold">Project Research</h3>
+            <p class="mt-2 text-sm text-white/70 leading-relaxed">
+              Deep dives on narratives, teams, products, and long-term signals — filtering hype from builders.
+            </p>
+            <div class="mt-4 text-xs text-white/60">
+              Signal-first • Calm conviction
+            </div>
+          </div>
+
+          <div class="reveal rounded-3xl border border-white/10 bg-panel p-6 shadow-glow hover:shadow-glowStrong transition group">
+            <div class="flex items-center justify-between">
+              <div class="rounded-2xl border border-white/10 bg-white/5 p-3">
+                <svg viewBox="0 0 24 24" class="h-5 w-5 text-neonPink">
+                  <path
+                    fill="currentColor"
+                    d="M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2zm2 14h2V8H7v9zm4 0h2V5h-2v12zm4 0h2v-6h-2v6z"
+                  />
+                </svg>
+              </div>
+              <span class="text-xs text-white/60">02</span>
+            </div>
+            <h3 class="mt-4 text-lg font-semibold">Opportunity Tracking</h3>
+            <p class="mt-2 text-sm text-white/70 leading-relaxed">
+              Watching the market, the bear cycles, and the quiet wins — staying ready for the next wave.
+            </p>
+            <div class="mt-4 text-xs text-white/60">
+              Bear market focus • Timing & patience
+            </div>
+          </div>
+
+          <div class="reveal rounded-3xl border border-white/10 bg-panel p-6 shadow-glow hover:shadow-glowStrong transition group">
+            <div class="flex items-center justify-between">
+              <div class="rounded-2xl border border-white/10 bg-white/5 p-3">
+                <svg viewBox="0 0 24 24" class="h-5 w-5 text-neonPurple">
+                  <path
+                    fill="currentColor"
+                    d="M12 12a5 5 0 100-10 5 5 0 000 10zm-7 9a7 7 0 0114 0H5zm14.5-9.5l1.5-1.5 1.5 1.5-1.5 1.5-1.5-1.5z"
+                  />
+                </svg>
+              </div>
+              <span class="text-xs text-white/60">03</span>
+            </div>
+            <h3 class="mt-4 text-lg font-semibold">Builder Engagement</h3>
+            <p class="mt-2 text-sm text-white/70 leading-relaxed">
+              Connecting with real builders, staying active in the ecosystem, and supporting what’s being shipped.
+            </p>
+            <div class="mt-4 text-xs text-white/60">
+              Community • Collaboration • Momentum
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Vibe -->
+      <section id="vibe" class="py-10 sm:py-14">
+        <div class="reveal flex items-end justify-between gap-4">
+          <div>
+            <div class="text-xs tracking-widest text-white/60">VIBE</div>
+            <h2 class="mt-2 text-2xl sm:text-3xl font-extrabold tracking-tight">
+              Vibe Level
+            </h2>
+            <p class="mt-3 text-white/70 max-w-2xl leading-relaxed">
+              Web3 Cosmic 7777/10000 🌌 — premium conviction with a warm, neon edge.
+            </p>
+          </div>
+          <div class="hidden md:flex items-center gap-2 text-sm text-white/60">
+            <span class="h-2 w-2 rounded-full bg-neonCyan"></span>
+            Slow glow • Smooth motion
+          </div>
+        </div>
+
+        <div class="mt-7 grid gap-4 lg:grid-cols-12">
+          <div class="reveal lg:col-span-5 rounded-3xl border border-white/10 bg-panel p-6 shadow-glow hover:shadow-glowStrong transition relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-neonCyan/10 via-neonPink/10 to-neonPurple/10 opacity-60"></div>
+            <div class="relative">
+              <div class="flex items-center justify-between">
+                <div>
+                  <div class="text-xs tracking-widest text-white/60">RING</div>
+                  <div class="mt-2 text-lg font-semibold">
+                    Web3 Cosmic
+                    <span class="text-white/60 font-medium">—</span>
+                    <span class="bg-gradient-to-r from-neonCyan via-neonPink to-neonPurple bg-clip-text text-transparent font-extrabold">
+                      7777/10000
+                    </span>
+                    🌌
+                  </div>
+                </div>
+                <div class="rounded-2xl border border-white/10 bg-white/5 px-3 py-2 text-xs text-white/70">
+                  <span id="pctText" class="font-semibold text-white">0%</span>
+                </div>
+              </div>
+
+              <div class="mt-6 grid place-items-center">
+                <div class="relative h-52 w-52">
+                  <svg class="h-52 w-52 -rotate-90" viewBox="0 0 120 120" aria-label="Vibe progress ring">
+                    <defs>
+                      <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#00F5FF" stop-opacity="0.95" />
+                        <stop offset="50%" stop-color="#FF3DFF" stop-opacity="0.9" />
+                        <stop offset="100%" stop-color="#8B5CFF" stop-opacity="0.95" />
+                      </linearGradient>
+                      <filter id="ringGlow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="2.5" result="coloredBlur"></feGaussianBlur>
+                        <feMerge>
+                          <feMergeNode in="coloredBlur"></feMergeNode>
+                          <feMergeNode in="SourceGraphic"></feMergeNode>
+                        </feMerge>
+                      </filter>
+                    </defs>
+
+                    <circle
+                      cx="60"
+                      cy="60"
+                      r="46"
+                      fill="none"
+                      stroke="rgba(255,255,255,0.10)"
+                      stroke-width="10"
+                    />
+                    <circle
+                      id="progressCircle"
+                      cx="60"
+                      cy="60"
+                      r="46"
+                      fill="none"
+                      stroke="url(#ringGrad)"
+                      stroke-linecap="round"
+                      stroke-width="10"
+                      stroke-dasharray="289.02652413026095"
+                      stroke-dashoffset="289.02652413026095"
+                      filter="url(#ringGlow)"
+                    />
+                  </svg>
+
+                  <div class="absolute inset-0 grid place-items-center text-center">
+                    <div class="rounded-3xl border border-white/10 bg-white/5 px-4 py-3 shadow-glow">
+                      <div class="text-xs tracking-widest text-white/60">VIBE LEVEL</div>
+                      <div class="mt-1 text-xl font-extrabold tracking-tight">
+                        <span class="bg-gradient-to-r from-neonCyan via-neonPink to-neonPurple bg-clip-text text-transparent">
+                          7777
+                        </span>
+                        <span class="text-white/40">/10000</span>
+                      </div>
+                      <div class="mt-1 text-sm text-white/75">🌌 Cosmic</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 flex flex-wrap gap-2">
+                <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white/70">
+                  <span class="h-2 w-2 rounded-full bg-neonCyan"></span>
+                  Neon Cyan
+                </span>
+                <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white/70">
+                  <span class="h-2 w-2 rounded-full bg-neonPink"></span>
+                  Neon Pink
+                </span>
+                <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white/70">
+                  <span class="h-2 w-2 rounded-full bg-neonPurple"></span>
+                  Neon Purple
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7 grid gap-4">
+            <div class="reveal rounded-3xl border border-white/10 bg-panel p-6 shadow-glow hover:shadow-glowStrong transition relative overflow-hidden">
+              <div class="absolute -right-16 -top-16 h-52 w-52 rounded-full bg-neonCyan/15 blur-3xl"></div>
+              <div class="relative">
+                <div class="text-sm font-semibold tracking-wide">Cosmic note</div>
+                <p class="mt-2 text-sm sm:text-base text-white/75 leading-relaxed">
+                  I’m here for the long-term tech, the real opportunities, and the builders who ship when it’s quiet.
+                  If you’re building something meaningful in Web3, I’m paying attention.
+                </p>
+              </div>
+            </div>
+
+            <div class="reveal rounded-3xl border border-white/10 bg-panel p-6 shadow-glow hover:shadow-glowStrong transition">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                  <div class="text-sm font-semibold tracking-wide">Connect</div>
+                  <div class="mt-1 text-sm text-white/70">
+                    Primary: X/Twitter — <span class="text-white font-semibold">@J_Caldwell21</span>
+                  </div>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                  <a
+                    href="https://x.com/J_Caldwell21"
+                    target="_blank"
+                    rel="noreferrer"
+                    class="rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold hover:bg-white/10 transition focus-ring"
+                  >
+                    Open X
+                  </a>
+                  <button
+                    id="copyBtnBottom"
+                    class="rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold hover:bg-white/10 transition focus-ring"
+                    type="button"
+                  >
+                    Copy Link
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="py-10 sm:py-14">
+        <div class="reveal flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-t border-white/10 pt-6">
+          <div class="text-sm text-white/60">
+            © <span id="year"></span> Dubem (@J_Caldwell21)
+          </div>
+          <div class="text-xs text-white/50">
+            Built with Cursor + Grok
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <!-- Floating Share/Copy -->
+    <div class="fixed bottom-4 right-4 z-40">
+      <button
+        id="floatingShare"
+        class="group relative rounded-2xl border border-white/10 bg-white/5 px-4 py-3 shadow-glow hover:shadow-glowStrong backdrop-blur-xl transition focus-ring"
+        type="button"
+        aria-label="Share or copy link"
+      >
+        <span class="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-gradient-to-r from-neonCyan/20 via-neonPink/20 to-neonPurple/20 rounded-2xl"></span>
+        <span class="relative inline-flex items-center gap-2 font-semibold text-sm">
+          <svg viewBox="0 0 24 24" class="h-5 w-5 text-neonCyan">
+            <path
+              fill="currentColor"
+              d="M18 16a3 3 0 00-2.4 1.2L8.9 13.7a3.1 3.1 0 000-3.4l6.7-3.5A3 3 0 1015 5a3 3 0 00.1.7L8.4 9.2a3 3 0 100 5.6l6.7 3.5A3 3 0 1018 16z"
+            />
+          </svg>
+          <span id="floatingShareText">Share Card</span>
+        </span>
+      </button>
+    </div>
+
+    <!-- Toast -->
+    <div
+      id="toast"
+      class="pointer-events-none fixed left-1/2 top-4 z-50 hidden -translate-x-1/2"
+      role="status"
+      aria-live="polite"
+    >
+      <div class="rounded-2xl border border-white/10 bg-ink/60 backdrop-blur-xl px-4 py-3 shadow-glow">
+        <div class="flex items-center gap-2 text-sm">
+          <span class="h-2 w-2 rounded-full bg-neonCyan shadow-[0_0_18px_rgba(0,245,255,0.75)]"></span>
+          <span id="toastText" class="text-white/85">Copied.</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (() => {
+        const VIBE_CURRENT = 7777;
+        const VIBE_MAX = 10000;
+        const targetPct = (VIBE_CURRENT / VIBE_MAX) * 100;
+
+        const toastEl = document.getElementById("toast");
+        const toastTextEl = document.getElementById("toastText");
+        let toastTimer = null;
+
+        function showToast(msg) {
+          toastTextEl.textContent = msg;
+          toastEl.classList.remove("hidden");
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(() => toastEl.classList.add("hidden"), 2200);
+        }
+
+        function setButtonText(el, text) {
+          if (!el) return;
+          el.textContent = text;
+        }
+
+        async function copyLink() {
+          const url = window.location.href;
+          try {
+            await navigator.clipboard.writeText(url);
+            showToast("Link copied.");
+            return true;
+          } catch {
+            try {
+              const ta = document.createElement("textarea");
+              ta.value = url;
+              ta.setAttribute("readonly", "");
+              ta.style.position = "fixed";
+              ta.style.top = "-9999px";
+              document.body.appendChild(ta);
+              ta.select();
+              document.execCommand("copy");
+              document.body.removeChild(ta);
+              showToast("Link copied.");
+              return true;
+            } catch {
+              showToast("Copy failed. Select & copy from the address bar.");
+              return false;
+            }
+          }
+        }
+
+        async function shareCard() {
+          const url = window.location.href;
+          const payload = {
+            title: "Dubem (@J_Caldwell21) — Personal Card",
+            text: "Web3 Cosmic 7777/10000 🌌",
+            url,
+          };
+          if (navigator.share) {
+            try {
+              await navigator.share(payload);
+              showToast("Shared.");
+              return true;
+            } catch {
+              return copyLink();
+            }
+          }
+          return copyLink();
+        }
+
+        // Wire up buttons
+        const copyBtnTop = document.getElementById("copyBtnTop");
+        const copyBtnTopText = document.getElementById("copyBtnTopText");
+        const copyBtnBottom = document.getElementById("copyBtnBottom");
+        const shareBtn = document.getElementById("shareBtn");
+        const floatingShare = document.getElementById("floatingShare");
+        const floatingShareText = document.getElementById("floatingShareText");
+
+        const onCopy = async () => {
+          setButtonText(copyBtnTopText, "Copying…");
+          const ok = await copyLink();
+          setButtonText(copyBtnTopText, ok ? "Copied" : "Copy Link");
+          setTimeout(() => setButtonText(copyBtnTopText, "Copy Link"), 1400);
+        };
+
+        copyBtnTop?.addEventListener("click", onCopy);
+        copyBtnBottom?.addEventListener("click", copyLink);
+        shareBtn?.addEventListener("click", shareCard);
+        floatingShare?.addEventListener("click", shareCard);
+
+        // Animated progress ring
+        const circle = document.getElementById("progressCircle");
+        const pctText = document.getElementById("pctText");
+        const radius = 46;
+        const circumference = 2 * Math.PI * radius;
+
+        function animateRing() {
+          if (!circle) return;
+          const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          const duration = prefersReduced ? 0 : 1400;
+          const start = performance.now();
+          const from = circumference;
+          const to = circumference * (1 - targetPct / 100);
+
+          circle.setAttribute("stroke-dasharray", String(circumference));
+          circle.setAttribute("stroke-dashoffset", String(from));
+
+          function frame(now) {
+            const t = duration === 0 ? 1 : Math.min(1, (now - start) / duration);
+            const eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
+            const val = from + (to - from) * eased;
+            circle.setAttribute("stroke-dashoffset", String(val));
+            const pct = Math.round(targetPct * eased);
+            if (pctText) pctText.textContent = `${pct}%`;
+            if (t < 1) requestAnimationFrame(frame);
+            else if (pctText) pctText.textContent = `${Math.round(targetPct)}%`;
+          }
+
+          requestAnimationFrame(frame);
+        }
+
+        // Reveal-on-scroll
+        const revealEls = Array.from(document.querySelectorAll(".reveal"));
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting) e.target.classList.add("is-visible");
+            }
+          },
+          { threshold: 0.15 }
+        );
+        revealEls.forEach((el) => io.observe(el));
+
+        // Start ring after initial paint
+        window.addEventListener("load", () => {
+          document.getElementById("year").textContent = new Date().getFullYear();
+          animateRing();
+        });
+
+        // Mobile quick nav (tap logo cycles)
+        const sections = ["#home", "#about", "#work", "#vibe"];
+        let idx = 0;
+        const logo = document.querySelector('a[href="#home"]');
+        logo?.addEventListener("dblclick", () => {
+          idx = (idx + 1) % sections.length;
+          document.querySelector(sections[idx])?.scrollIntoView({ behavior: "smooth" });
+          showToast(`Jumped to ${sections[idx].slice(1)}.`);
+        });
+
+        // Floating button subtle state
+        if (!navigator.share) {
+          floatingShareText.textContent = "Copy Link";
+        }
+      })();
+    </script>
+  </body>
+</html>
